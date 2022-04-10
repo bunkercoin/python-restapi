@@ -1,5 +1,6 @@
 import json
 from json import JSONEncoder
+from waitress import serve
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
@@ -114,8 +115,7 @@ api.add_resource(diff, '/diff')  #
 api.add_resource(mempoolinfo, '/meminfo')  # 
 api.add_resource(chaininfo, '/info')  # 
 api.add_resource(blockchaininfo, '/blockchaininfo')  #
- 
+
 
 if __name__ == '__main__':
-    app.run(port=5001)  # run our Flask app
-
+    serve(app, host="0.0.0.0", port=5000)  # run our Flask app
