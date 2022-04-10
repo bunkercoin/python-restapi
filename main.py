@@ -1,3 +1,5 @@
+import json
+from json import JSONEncoder
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
@@ -36,7 +38,7 @@ class bloc(Resource):
      return {
          'apiver': apiversion,
          'result': {
-                'blockcount': get
+                {"blockcount": str(get)}
          }
          } # This will print the balance
     pass
@@ -49,178 +51,71 @@ class hashrate(Resource):
      return {
          'apiver': apiversion,
          'result': {
-                'hashrate': str(get)
+                {"hashrate": str(get)}
          }
          } # This will print the balance
     pass
 
-api.add_resource(HelloWorld, '/online')  # '/online' should retuen {'api': 'online'} if the api is online. Yes this is a very useful comment :)
+class diff(Resource):
+    print("Hello World")
+    def get(self):
+     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:22225" % ('user', 'pass'))
+     get = rpc_connection.getdifficulty()
+     return {
+         'apiver': apiversion,
+         'result': {
+                 {"difficulty": str(get)}
+         }
+         } # This will print the balance
+    pass
+
+class mempoolinfo(Resource):
+    print("Hello World")
+    def get(self):
+     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:22225" % ('user', 'pass'))
+     get = rpc_connection.getmempoolinfo()
+     return {
+         'apiver': apiversion,
+         'result': 
+         {
+             {"mempool": str(get)}
+         }
+     }
+          # This will print the balance
+    pass
+
+class chaininfo(Resource):
+    print("Hello World")
+    def get(self):
+     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:22225" % ('user', 'pass'))
+     get = rpc_connection.getinfo()
+     return {
+         'apiver': apiversion,
+         'result': {"info": str(get)}
+     }
+          # This will print the balance
+    pass
+class blockchaininfo(Resource):
+    print("Hello World")
+    def get(self):
+     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:22225" % ('user', 'pass'))
+     get = rpc_connection.getblockchaininfo()
+     return {
+         'apiver': apiversion,
+         'result': {"info": str(get)}
+     }
+          # This will print the balance
+    pass
+
 api.add_resource(bloc, '/blockcount')  # 
 api.add_resource(apiinfo, '/apinfo')  # 
 api.add_resource(hashrate, '/hashrate')  # 
+api.add_resource(diff, '/diff')  # 
+api.add_resource(mempoolinfo, '/meminfo')  # 
+api.add_resource(chaininfo, '/info')  # 
+api.add_resource(blockchaininfo, '/blockchaininfo')  #
+ 
 
 if __name__ == '__main__':
-    app.run()  # run our Flask app
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    app.run(port=5001)  # run our Flask app
 
