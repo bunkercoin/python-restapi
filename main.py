@@ -8,7 +8,7 @@ from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 app = Flask(__name__)
 api = Api(app)
 
-apiversion = "0.1"
+apiversion = "1.0"
 
 
 class HelloWorld(Resource):
