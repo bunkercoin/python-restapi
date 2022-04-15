@@ -1,3 +1,4 @@
+from waitress import serve
 from flask import Flask, jsonify
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 
@@ -91,4 +92,4 @@ def blockchaininfo():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+        serve(app, port=5000)  # run our Flask app
