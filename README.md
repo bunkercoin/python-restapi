@@ -6,7 +6,7 @@
 
 This will return the blockcount
 
-# /apinfo
+# /apiinfo
 
 Return basic information on the API like version
 
