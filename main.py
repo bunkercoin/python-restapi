@@ -18,7 +18,7 @@ def apiinfo():
             "id": "bkc-rest-api",
             "version": apiversion,
             "description": "Bunkercoin REST API Alpha 2.0",
-            "author": "BastelPichi"
+            "author": "The Bunkercoin Developers"
         }
     })
 
