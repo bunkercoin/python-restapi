@@ -13,11 +13,11 @@ password = "rpcpassword"
 @app.route("/apiinfo")
 def apiinfo():
     return jsonify({
-        "apiver": apiversion,
+        "api version": apiversion,
         "result": {
             "id": "bkc-rest-api",
             "version": apiversion,
-            "description": "Bunkercoin REST API Alpha 2.0",
+            "description": "Bunkercoin REST API Alpha "+apiversion,
             "author": "The Bunkercoin Project"
         }
     })
