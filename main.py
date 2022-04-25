@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 apiversion = 2.0
 
-username = "username"
-password = "password"
+username = "rpcusername"
+password = "rpcpassword"
 
 
 @app.route("/apiinfo")
