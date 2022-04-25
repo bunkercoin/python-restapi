@@ -1,3 +1,4 @@
+from unittest import result
 from waitress import serve
 from flask import Flask, jsonify
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
@@ -6,8 +7,8 @@ app = Flask(__name__)
 
 apiversion = 2.0
 
-username = "rpcuser"
-password = "rpcpassword"
+username = "username"
+password = "password"
 
 
 @app.route("/apiinfo")
@@ -30,6 +31,18 @@ def blockcount():
         "apiver": apiversion,
         "result": {
             "blockcount": result
+        }
+    })
+
+@app.route("/blockbyheight/<int:height>")
+def blockbyheight(height):
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
+    tx = rpc_connection.getblockhash(height)
+    result = rpc_connection.getblock(tx)
+    return jsonify({
+        "apiver": apiversion,
+        "result": {
+            "block": result
         }
     })
 
