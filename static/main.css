@@ -1,0 +1,18 @@
+body {
+    background: #F0F0F0;
+    margin-top: 50px;
+    margin-left: 100px;
+    font-family: COMIC SANS MS;
+}
+
+a:link, a:visited {
+    color:  #77C277;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+a:hover, a:active {
+    color: #F0F0F0;
+    background-color: transparent;
+    text-decoration: underline;
+  }
