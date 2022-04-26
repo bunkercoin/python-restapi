@@ -1,4 +1,5 @@
 ### Bunkercoin Flask API written in Python
+### Live at https://api.bunkercoin.xyz
 
 ## Basic documentation
 
@@ -6,7 +7,7 @@
 
 This will return the blockcount
 
-# /apinfo
+# /apiinfo
 
 Return basic information on the API like version
 
@@ -29,3 +30,4 @@ Return info
 # /blockchaininfo
 
 Get info about the blockchain
+

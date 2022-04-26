@@ -1,26 +1,15 @@
-from flask import Flask, jsonify
+from unittest import result
+from waitress import serve
+from flask import Flask, jsonify, render_template
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 
-##############################################
-# Bunkercoin REST API
-# Originally made by IdotMaster1
-# Fully rewritten by BastelPichi.
-# This code is distributed under GPL3 license.
-# See LICENSE file for licensing.
-#
-# Todo: add exceptions when communication
-# with bunkercoind
-#
-# Use a proper WSGI Server
-# (e.g. Apache or NGINX) to deploy
-##############################################
-
-username = "rpcuser"
-password = "rpcpassword"
-
+app = Flask(__name__)
 
 apiversion = 2.0
-app = Flask(__name__)
+
+username = "rpcusername"
+password = "rpcpassword"
+
 
 @app.route("/")
 def index():
@@ -34,13 +23,13 @@ def apiinfo():
             "id": "bkc-rest-api",
             "version": apiversion,
             "description": "Bunkercoin REST API Alpha 2.0",
-            "author": "BastelPichi"
+            "author": "The Bunkercoin Project"
         }
     })
 
 @app.route("/blockcount")
 def blockcount():
-    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22225")
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
     result = rpc_connection.getblockcount()
     return jsonify({
         "apiver": apiversion,
@@ -49,9 +38,21 @@ def blockcount():
         }
     })
 
+@app.route("/blockbyheight/<int:height>")
+def blockbyheight(height):
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
+    tx = rpc_connection.getblockhash(height)
+    result = rpc_connection.getblock(tx)
+    return jsonify({
+        "apiver": apiversion,
+        "result": {
+            "block": result
+        }
+    })
+
 @app.route("/hashrate")
 def hashrate():
-    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22225")
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
     result = rpc_connection.getnetworkhashps()
     return jsonify({
         "apiver": apiversion,
@@ -63,7 +64,7 @@ def hashrate():
 
 @app.route("/diff")
 def diff():
-    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22225")
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
     result = rpc_connection.getdifficulty()
     return jsonify({
         "apiver": apiversion,
@@ -74,7 +75,7 @@ def diff():
 
 @app.route("/meminfo")
 def meminfo():
-    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22225")
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
     result = rpc_connection.getmempoolinfo()
     return jsonify({
         "apiver": apiversion,
@@ -85,7 +86,7 @@ def meminfo():
 
 @app.route("/info")
 def info():
-    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22225")
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
     result = rpc_connection.getinfo()
     return jsonify({
         "apiver": apiversion,
@@ -97,7 +98,7 @@ def info():
 
 @app.route("/blockchaininfo")
 def blockchaininfo():
-    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22225")
+    rpc_connection = AuthServiceProxy(f"http://{username}:{password}@127.0.0.1:22555")
     result = rpc_connection.getblockchaininfo()
     return jsonify({
         "apiver": apiversion,
@@ -108,4 +109,4 @@ def blockchaininfo():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+        serve(app, port=5000)  # run our Flask app
