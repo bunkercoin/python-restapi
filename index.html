@@ -1,0 +1,54 @@
+<!--  how to use css in python_ flask-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bunkercoin Rest-API</title>
+    <link rel="icon" href="/staticFiles/logo.ico">
+    <!--  Load CSS in Flask with html-->
+    <link rel="stylesheet" href='/staticFiles/main.css' />
+    <header style="font-size: xx-large;text-align: center;text-decoration: underline;">Bunkercoin Rest-API</header>
+</head>
+
+<body>
+    <div style="font-size: x-large;padding: 10px;">
+        <p>Bunkercoin's very own Rest-API(Handmade with ♡)<br/>Bunkercoin Flask API written in Python<br/>The basic documention is below</p>
+        <details>
+            <summary>How to use?</summary>
+            <ul>
+                <li>
+                /blockcount | <code>returns the blockcount</code>
+                </li>
+                <li>
+                    /apiinfo | <code>Return basic information on the API like version</code>
+                </li>
+                <li>
+                    /hashrate | <code>Return the current hashrate</code>
+                </li>
+                <li>
+                    /diff | <code>Return the difficulty</code>
+                </li>
+                <li>
+                    /meminfo | <code>Return information about the mempool</code>
+                </li>
+                <li>
+                    /blockchaininfo | <code>Get info about the blockchain</code>
+                </li>
+                <li>
+                    /height/e.g 1 | <code>Shows info about that block</code>
+                </li>
+                <li>
+                    /getblockhash/e.g 1 | <code>Only retrieves the blocks hash</code>
+                </li>
+            </ul>
+        </details>
+    </div>
+    <div style="font-size: larger;">
+    <a href="https://bunkercoin.xyz/">About BKC</a>
+    <br/>
+    <a href="https://github.com/bunkercoin/python-restapi">OpenSource</a>
+    </div>
+</body>
+
+
+</html>
