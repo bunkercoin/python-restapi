@@ -1,6 +1,6 @@
 from unittest import result
 from waitress import serve
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 
 app = Flask(__name__)
@@ -10,6 +10,10 @@ apiversion = 2.0
 username = "rpcusername"
 password = "rpcpassword"
 
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/apiinfo")
 def apiinfo():
