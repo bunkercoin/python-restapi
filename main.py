@@ -4,8 +4,8 @@ from flask import Flask, render_template,jsonify
 from bitcoinrpc.authproxy import AuthServiceProxy
 ##############################################
 #user and password for rpc server e.g bunkercoind
-rpcuser = "jamil"
-rpcpass = "jamil"
+rpcuser = "username" #enter username
+rpcpass = "password" #enter password
 
 app = Flask(__name__, template_folder='templateFiles', static_folder='staticFiles') #get the html files
 
@@ -129,5 +129,5 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 if __name__ == "__main__":
-        serve(app, port=5025) #run our Flask app
+        serve(app, port=5000) #run our Flask app
         
